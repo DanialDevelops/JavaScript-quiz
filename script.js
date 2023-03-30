@@ -2,6 +2,8 @@
 var questionContainer = document.getElementById("question-container");
 var startContainer = document.getElementById("start-container");
 var endContainer = document.getElementById("end-container");
+var answerBtn = document.getElementById("answer-buttons")
+var questionEl = document.getElementById("question")
 var startBtn = document.getElementById("start-btn");
 var timerEl = document.getElementById("time")
 var mixedQuestions, currentQuestion
@@ -10,33 +12,50 @@ var timeInterval;
 
 
 
+
 function startQuiz(){
+    timer()
     questionContainer.classList.remove("hide");
     startContainer.classList.add("hide")
+    mixedQuestions = questions.sort(() => Math.random() - .5)
+        currentQuestion = 0
+        nextQuestion()
+}
+
+
+function timer(){
     timeInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent = timeLeft;
         if (timeLeft <= 0) {
             endGame();
         }
-        mixedQuestions = questions.sort(() => Math.random() - .5)
-        currentQuestion = 0
-        nextQuestion()
     }, 1000)
+}
 
+function selectAnswer(e){
 
 }
 
-function selectAnswer(){
-
-}
+timeLeft = timeLeft-5
 
 function nextQuestion(){
     displayQuestion(mixedQuestions[currentQuestion])
+    console.log(questions.choices[0])
 }
 
-function displayQuestion(){
-
+function displayQuestion(question){
+    questionEl.innerText = question.question
+    questions.answers.forEach(answer => {
+        var button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        
+    })
 }
 
 
@@ -44,6 +63,20 @@ function displayQuestion(){
 function endGame(){
     clearInterval(timeInterval);
 }
+
+var questions = [
+    {
+        question : "String values must be enclosed within ___ when being assigned to variables",
+        answers : [
+            {text: "commas", correct: true },
+            {text: "curly brackets", correct: false},
+            {text:  "quotes", correct: false},
+            {text: "parenthesis", correct: false},
+        ]
+    }
+]
+
+
 
 
 startBtn.addEventListener("click", startQuiz);
