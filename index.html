@@ -6,7 +6,7 @@
     <link href="./assets/css/style.css" rel="stylesheet" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Coding Quiz</title>
   </head>
   <body>
     <div class="container">
@@ -20,20 +20,27 @@
       <div id="question-container" class="hide">
         <p>time: <span id="time"></span></p>
         <h2 id="question">Question</h2>
-        <div id="answer-buttons" class="btnn-grid">
-          <button class="btn">Answer 1</button>
-          <button class="btn">Answer 2</button>
-          <button class="btn">Answer 3</button>
-          <button class="btn">Answer 4</button>
+        <div id="answer-buttons" class="btn-grid">
+      
         </div>
       </div>
       <div id="end-container" class="hide">
-        <button id="next-btn" class="next-btn btn hide">Submit Score</button>
+        <h2>Quiz Over!</h2>
+        <p>Your final score is <span id="score"></span>.</p>
+          <form id="initials-form">
+            <label for="initials">Enter your initials:</label>
+            <input type="text" id="initials-input" name="initials" maxlength="3" />
+            <button type="submit" id="submit-btn" class="btn">Submit Score</button>
+          </form>
       </div>
     </div>
-
-    
-    <script src="questions.js"></script>
+    <div id="highscores-container" class="hide">
+      <h2>High Scores</h2>
+      <ol id="highscores-list"></ol>
+        <button id="go-back-btn" class="btn">Go Back</button>
+        <button id="clear-scores-btn" class="btn">Clear Scores</button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
